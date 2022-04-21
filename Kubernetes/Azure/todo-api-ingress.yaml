@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todo-api-ingress
+  namespace: todo-ns
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: todo-api.<Ingress IP Address>.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: todo-api-service
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
